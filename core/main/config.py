@@ -101,6 +101,9 @@ class R2RConfig:
         for section, keys in R2RConfig.REQUIRED_KEYS.items():
             # Check the keys when provider is set
             # TODO - Clean up robust null checks
+            logger.info("=============")
+            logger.info(f"section = {section}")
+            logger.info("=============")
             if "provider" in default_config[section] and (
                 default_config[section]["provider"] is not None
                 and default_config[section]["provider"] != "None"
@@ -172,6 +175,8 @@ class R2RConfig:
     @classmethod
     def load_default_config(cls) -> dict:
         with open(R2RConfig.default_config_path) as f:
+            logger.info("=== r2r default config ===")
+            logger.info(f.read())
             return toml.load(f)
 
     @staticmethod

@@ -21,7 +21,6 @@ volumes:
 services:
   postgres:
     image: pgvector/pgvector:pg16
-    profiles: [postgres]
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST:-postgres}
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
@@ -343,12 +342,13 @@ services:
       '
     networks:
       - r2r-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:${PORT:-7272}/v2/health"]
-      interval: 6s
-      timeout: 5s
-      retries: 5
-    restart: on-failure
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:${PORT:-7272}/v2/health"]
+    #   interval: 6s
+    #   timeout: 5s
+    #   retries: 5
+    # restart: on-failure
+    tty: true
     volumes:
       - ${CONFIG_PATH:-/}:${CONFIG_PATH:-/app/config}
       - hatchet_api_key:/hatchet_api_key:ro
