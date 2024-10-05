@@ -89,6 +89,10 @@ class R2RConfig:
         """
         # Load the default configuration
         default_config = self.load_default_config()
+        
+        logger.info("=== r2r default config(toml) ===")
+        logger.info(default_config)
+        logger.info("==========================")
 
         # Override the default configuration with the passed configuration
         for key in config_data:
@@ -175,8 +179,6 @@ class R2RConfig:
     @classmethod
     def load_default_config(cls) -> dict:
         with open(R2RConfig.default_config_path) as f:
-            logger.info("=== r2r default config ===")
-            logger.info(f.read())
             return toml.load(f)
 
     @staticmethod
